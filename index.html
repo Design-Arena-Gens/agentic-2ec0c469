@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SAP Fiori: Create a Tile and Assign to a TCode (Step-by-Step)</title>
+  <meta name="description" content="Step-by-step tutorial to create a SAP Fiori tile and map it to an SAP GUI transaction (tcode), with detailed explanations and illustrative screenshots." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>SAP Fiori: Create a Tile and Assign to a TCode</h1>
+      <p class="subtitle">Complete, detailed walkthrough with visual screenshots</p>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <aside class="toc">
+      <div class="toc-card">
+        <h2>Contents</h2>
+        <ol>
+          <li><a href="#prerequisites">Prerequisites</a></li>
+          <li><a href="#step-1">Step 1 ? Open the Launchpad Designer</a></li>
+          <li><a href="#step-2">Step 2 ? Create a Catalog</a></li>
+          <li><a href="#step-3">Step 3 ? Create a Static Tile</a></li>
+          <li><a href="#step-4">Step 4 ? Create Target Mapping to TCode</a></li>
+          <li><a href="#step-5">Step 5 ? Create Space and Page</a></li>
+          <li><a href="#step-6">Step 6 ? Assign Catalog/Space to a Role (PFCG)</a></li>
+          <li><a href="#step-7">Step 7 ? Assign Role to User</a></li>
+          <li><a href="#step-8">Step 8 ? Test the Tile</a></li>
+          <li><a href="#troubleshooting">Troubleshooting</a></li>
+        </ol>
+      </div>
+    </aside>
+
+    <article class="content">
+      <section id="prerequisites" class="card">
+        <h2>Prerequisites</h2>
+        <ul>
+          <li><strong>Authorizations</strong>: Access to Fiori Launchpad Designer and PFCG.</li>
+          <li><strong>System</strong>: SAP S/4HANA or SAP Fiori for SAP ERP with FLP.</li>
+          <li><strong>Target</strong>: An SAP GUI transaction code (example: <code>VA03</code>).</li>
+        </ul>
+      </section>
+
+      <section id="step-1" class="card">
+        <h2>Step 1 ? Open the Launchpad Designer</h2>
+        <p>
+          Use the Fiori Launchpad Designer to configure catalogs, tiles, and target mappings. In most on-prem setups:
+        </p>
+        <ul>
+          <li>For client-specific customizing: go to <code>/ui2/flpd_cust</code></li>
+          <li>For cross-client configuration: go to <code>/ui2/flpd_conf</code></li>
+        </ul>
+        <div class="screenshot">
+          <!-- Mock screenshot: FLPD landing -->
+          <svg viewBox="0 0 960 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Launchpad Designer Landing">
+            <defs>
+              <linearGradient id="grad1" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#eef2ff"/>
+                <stop offset="100%" stop-color="#f8fafc"/>
+              </linearGradient>
+            </defs>
+            <rect width="960" height="520" fill="url(#grad1)"/>
+            <rect x="24" y="24" width="912" height="56" rx="8" fill="#0f172a" opacity="0.92"/>
+            <text x="48" y="60" fill="#fff" font-size="22" font-family="Inter, Arial" font-weight="600">Fiori Launchpad Designer</text>
+            <rect x="24" y="96" width="240" height="384" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+            <text x="44" y="132" fill="#111827" font-size="16" font-family="Inter" font-weight="600">Navigation</text>
+            <rect x="44" y="152" width="200" height="28" rx="6" fill="#f3f4f6"/>
+            <text x="56" y="171" fill="#111827" font-size="13" font-family="Inter">Catalogs</text>
+            <rect x="44" y="188" width="200" height="28" rx="6" fill="#f3f4f6"/>
+            <text x="56" y="207" fill="#111827" font-size="13" font-family="Inter">Target Mappings</text>
+            <rect x="44" y="224" width="200" height="28" rx="6" fill="#f3f4f6"/>
+            <text x="56" y="243" fill="#111827" font-size="13" font-family="Inter">Spaces & Pages</text>
+            <rect x="288" y="96" width="648" height="384" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+            <text x="308" y="132" fill="#111827" font-size="18" font-family="Inter" font-weight="600">Welcome</text>
+            <text x="308" y="162" fill="#374151" font-size="14" font-family="Inter">Create or edit catalogs, tiles, and target mappings</text>
+          </svg>
+        </div>
+      </section>
+
+      <section id="step-2" class="card">
+        <h2>Step 2 ? Create a Catalog</h2>
+        <ol>
+          <li>In the left pane, select <strong>Catalogs</strong>.</li>
+          <li>Click <strong>+</strong> (Create Catalog).</li>
+          <li>Enter <strong>Title</strong> (e.g., <code>Z_SALES</code>) and optional <strong>ID</strong> and <strong>Description</strong>.</li>
+          <li>Save.</li>
+        </ol>
+        <div class="screenshot">
+          <!-- Mock screenshot: Create Catalog dialog -->
+          <svg viewBox="0 0 960 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Create Catalog Dialog">
+            <rect width="960" height="520" fill="#f8fafc"/>
+            <rect x="180" y="100" width="600" height="320" rx="10" fill="#ffffff" stroke="#e5e7eb"/>
+            <text x="210" y="140" fill="#111827" font-size="18" font-family="Inter" font-weight="600">Create Catalog</text>
+            <text x="210" y="176" fill="#374151" font-size="13" font-family="Inter">Title</text>
+            <rect x="210" y="188" width="540" height="36" rx="6" fill="#f3f4f6"/>
+            <text x="222" y="211" fill="#6b7280" font-size="13" font-family="Inter">Z_SALES</text>
+            <text x="210" y="236" fill="#374151" font-size="13" font-family="Inter">ID (optional)</text>
+            <rect x="210" y="248" width="540" height="36" rx="6" fill="#f3f4f6"/>
+            <text x="222" y="271" fill="#6b7280" font-size="13" font-family="Inter">Z_SALES</text>
+            <text x="210" y="296" fill="#374151" font-size="13" font-family="Inter">Description (optional)</text>
+            <rect x="210" y="308" width="540" height="36" rx="6" fill="#f3f4f6"/>
+            <rect x="610" y="356" width="140" height="40" rx="8" fill="#2563eb"/>
+            <text x="660" y="382" fill="#fff" font-size="14" font-family="Inter" text-anchor="middle">Save</text>
+          </svg>
+        </div>
+      </section>
+
+      <section id="step-3" class="card">
+        <h2>Step 3 ? Create a Static Tile</h2>
+        <ol>
+          <li>Open the catalog you created.</li>
+          <li>Click <strong>Add</strong> ? <strong>App Launcher - Static</strong>.</li>
+          <li>Fill <strong>Title</strong>, <strong>Subtitle</strong> (optional), <strong>Keywords</strong>, and <strong>Icon</strong>.</li>
+          <li>In <strong>Navigation</strong>, provide the <strong>Semantic Object</strong> and <strong>Action</strong> that will link to your target mapping (configured in the next step). Example: <code>Semantic Object = SalesOrder</code>, <code>Action = display</code>.</li>
+          <li>Save.</li>
+        </ol>
+        <div class="screenshot">
+          <!-- Mock screenshot: Tile editor -->
+          <svg viewBox="0 0 960 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Static Tile Editor">
+            <rect width="960" height="520" fill="#ffffff"/>
+            <rect x="32" y="32" width="896" height="456" rx="10" fill="#f8fafc" stroke="#e5e7eb"/>
+            <text x="56" y="72" fill="#111827" font-size="18" font-family="Inter" font-weight="600">App Launcher - Static</text>
+            <text x="56" y="110" fill="#374151" font-size="13" font-family="Inter">Title</text>
+            <rect x="56" y="122" width="340" height="34" rx="6" fill="#f3f4f6"/>
+            <text x="68" y="144" fill="#6b7280" font-size="13" font-family="Inter">Display Sales Order</text>
+            <text x="56" y="170" fill="#374151" font-size="13" font-family="Inter">Subtitle</text>
+            <rect x="56" y="182" width="340" height="34" rx="6" fill="#f3f4f6"/>
+            <text x="56" y="230" fill="#374151" font-size="13" font-family="Inter">Navigation</text>
+            <text x="56" y="252" fill="#6b7280" font-size="12" font-family="Inter">Semantic Object</text>
+            <rect x="56" y="262" width="200" height="32" rx="6" fill="#f3f4f6"/>
+            <text x="68" y="283" fill="#6b7280" font-size="12" font-family="Inter">SalesOrder</text>
+            <text x="270" y="252" fill="#6b7280" font-size="12" font-family="Inter">Action</text>
+            <rect x="270" y="262" width="200" height="32" rx="6" fill="#f3f4f6"/>
+            <text x="282" y="283" fill="#6b7280" font-size="12" font-family="Inter">display</text>
+            <rect x="720" y="430" width="160" height="40" rx="8" fill="#2563eb"/>
+            <text x="800" y="456" fill="#fff" font-size="14" font-family="Inter" text-anchor="middle">Save</text>
+          </svg>
+        </div>
+      </section>
+
+      <section id="step-4" class="card">
+        <h2>Step 4 ? Create Target Mapping to the TCode</h2>
+        <p>
+          The target mapping connects your tile?s intent (<em>Semantic Object</em> + <em>Action</em>) to the runtime app. For SAP GUI transactions, use <strong>Application Type: SAP GUI for HTML</strong> and specify the <strong>Transaction</strong>.
+        </p>
+        <ol>
+          <li>In the same catalog, open <strong>Target Mappings</strong> and click <strong>+</strong>.</li>
+          <li>Enter <strong>Semantic Object</strong> and <strong>Action</strong> to match the tile (e.g., <code>SalesOrder</code> / <code>display</code>).</li>
+          <li>Set <strong>Application Type</strong> = <em>SAP GUI for HTML</em>.</li>
+          <li>Set <strong>Transaction</strong> = your tcode (e.g., <code>VA03</code>).</li>
+          <li>Save.
+          </li>
+        </ol>
+        <div class="screenshot">
+          <!-- Mock screenshot: Target Mapping form -->
+          <svg viewBox="0 0 960 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Target Mapping Form">
+            <rect width="960" height="520" fill="#f8fafc"/>
+            <rect x="40" y="40" width="880" height="440" rx="10" fill="#ffffff" stroke="#e5e7eb"/>
+            <text x="64" y="80" fill="#111827" font-size="18" font-family="Inter" font-weight="600">Create Target Mapping</text>
+            <text x="64" y="118" fill="#374151" font-size="13" font-family="Inter">Semantic Object</text>
+            <rect x="64" y="130" width="240" height="34" rx="6" fill="#f3f4f6"/>
+            <text x="76" y="152" fill="#6b7280" font-size="12" font-family="Inter">SalesOrder</text>
+            <text x="320" y="118" fill="#374151" font-size="13" font-family="Inter">Action</text>
+            <rect x="320" y="130" width="200" height="34" rx="6" fill="#f3f4f6"/>
+            <text x="332" y="152" fill="#6b7280" font-size="12" font-family="Inter">display</text>
+            <text x="64" y="188" fill="#374151" font-size="13" font-family="Inter">Application Type</text>
+            <rect x="64" y="200" width="240" height="34" rx="6" fill="#f3f4f6"/>
+            <text x="76" y="222" fill="#6b7280" font-size="12" font-family="Inter">SAP GUI for HTML</text>
+            <text x="64" y="248" fill="#374151" font-size="13" font-family="Inter">Transaction</text>
+            <rect x="64" y="260" width="200" height="34" rx="6" fill="#f3f4f6"/>
+            <text x="76" y="282" fill="#6b7280" font-size="12" font-family="Inter">VA03</text>
+            <rect x="760" y="420" width="120" height="38" rx="8" fill="#2563eb"/>
+            <text x="820" y="445" fill="#fff" font-size="14" font-family="Inter" text-anchor="middle">Save</text>
+          </svg>
+        </div>
+        <div class="note">
+          Tip: The tile and the target mapping must share the same <em>Semantic Object</em> and <em>Action</em> so the intent resolves correctly.
+        </div>
+      </section>
+
+      <section id="step-5" class="card">
+        <h2>Step 5 ? Create Space and Page</h2>
+        <p>
+          Spaces and Pages are the modern replacement for Groups. Create a Space, then a Page, and add your catalog tile to that Page.
+        </p>
+        <ol>
+          <li>In Designer, switch to <strong>Spaces</strong> and create a new Space (e.g., <code>Z_SALES_SPACE</code>).</li>
+          <li>Create a <strong>Page</strong> (e.g., <code>Z_SALES_PAGE</code>) under that Space.</li>
+          <li>In the Page builder, add a section and drag your tile from the catalog content.</li>
+          <li>Save & <strong>Publish</strong> the Page.</li>
+        </ol>
+        <div class="screenshot">
+          <!-- Mock screenshot: Page builder -->
+          <svg viewBox="0 0 960 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Spaces and Pages Builder">
+            <rect width="960" height="520" fill="#ffffff"/>
+            <rect x="24" y="24" width="912" height="56" rx="8" fill="#0f172a" opacity="0.92"/>
+            <text x="48" y="60" fill="#fff" font-size="20" font-family="Inter" font-weight="600">Spaces & Pages</text>
+            <rect x="24" y="96" width="300" height="384" rx="8" fill="#f8fafc" stroke="#e5e7eb"/>
+            <text x="44" y="130" fill="#111827" font-size="14" font-family="Inter" font-weight="600">Z_SALES_SPACE</text>
+            <rect x="344" y="96" width="592" height="384" rx="8" fill="#f8fafc" stroke="#e5e7eb"/>
+            <text x="364" y="130" fill="#111827" font-size="14" font-family="Inter" font-weight="600">Z_SALES_PAGE</text>
+            <rect x="364" y="154" width="552" height="64" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+            <text x="380" y="188" fill="#374151" font-size="13" font-family="Inter">Section: Sales Orders</text>
+            <rect x="380" y="228" width="160" height="120" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+            <text x="400" y="260" fill="#111827" font-size="12" font-family="Inter" font-weight="600">Display Sales Order</text>
+            <text x="400" y="282" fill="#6b7280" font-size="11" font-family="Inter">Opens VA03 (GUI for HTML)</text>
+          </svg>
+        </div>
+      </section>
+
+      <section id="step-6" class="card">
+        <h2>Step 6 ? Assign Catalog and Space to a Role (PFCG)</h2>
+        <p>Use <strong>PFCG</strong> to create/maintain a role that exposes the catalog and the space/page to users.</p>
+        <ol>
+          <li>Open <strong>PFCG</strong>, create a role (e.g., <code>Z_SALES_FIORI</code>).</li>
+          <li>On the <strong>Menu</strong> tab, add <strong>Fiori Tile Catalog</strong> and select your catalog.</li>
+          <li>Add <strong>Fiori Space</strong> and select your space/page.</li>
+          <li>Generate authorizations and save the role.</li>
+        </ol>
+        <div class="screenshot">
+          <!-- Mock screenshot: PFCG role -->
+          <svg viewBox="0 0 960 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PFCG Role Maintenance">
+            <rect width="960" height="520" fill="#f8fafc"/>
+            <rect x="28" y="28" width="904" height="464" rx="10" fill="#ffffff" stroke="#e5e7eb"/>
+            <text x="50" y="64" fill="#111827" font-size="18" font-family="Inter" font-weight="600">Role: Z_SALES_FIORI</text>
+            <text x="50" y="96" fill="#374151" font-size="13" font-family="Inter" font-weight="600">Menu</text>
+            <rect x="50" y="108" width="860" height="44" rx="6" fill="#f3f4f6"/>
+            <text x="62" y="136" fill="#374151" font-size="12" font-family="Inter">+ Fiori Tile Catalog ? Z_SALES | + Fiori Space ? Z_SALES_SPACE</text>
+            <text x="50" y="176" fill="#374151" font-size="13" font-family="Inter" font-weight="600">Authorizations</text>
+            <rect x="50" y="188" width="860" height="44" rx="6" fill="#f3f4f6"/>
+            <text x="62" y="216" fill="#374151" font-size="12" font-family="Inter">Generate ? Save</text>
+          </svg>
+        </div>
+      </section>
+
+      <section id="step-7" class="card">
+        <h2>Step 7 ? Assign Role to User</h2>
+        <p>
+          Assign the role to the end user (e.g., via <strong>SU01</strong>). After assignment, the user should see the new tile in the FLP after refresh/relogin.
+        </p>
+        <div class="screenshot">
+          <!-- Mock screenshot: SU01 role assignment -->
+          <svg viewBox="0 0 960 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SU01 Role Assignment">
+            <rect width="960" height="360" fill="#ffffff"/>
+            <rect x="40" y="40" width="880" height="280" rx="10" fill="#f8fafc" stroke="#e5e7eb"/>
+            <text x="64" y="80" fill="#111827" font-size="18" font-family="Inter" font-weight="600">User Maintenance (SU01)</text>
+            <text x="64" y="120" fill="#374151" font-size="13" font-family="Inter">Roles</text>
+            <rect x="64" y="132" width="820" height="34" rx="6" fill="#f3f4f6"/>
+            <text x="76" y="154" fill="#6b7280" font-size="12" font-family="Inter">Z_SALES_FIORI</text>
+          </svg>
+        </div>
+      </section>
+
+      <section id="step-8" class="card">
+        <h2>Step 8 ? Test the Tile</h2>
+        <ol>
+          <li>Log into the Fiori Launchpad as the test user.</li>
+          <li>Open the Space and Page where you added the tile.</li>
+          <li>Click the tile ? it should open the transaction in SAP GUI for HTML.</li>
+        </ol>
+        <div class="screenshot">
+          <!-- Mock screenshot: Final tile on FLP -->
+          <svg viewBox="0 0 960 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tile on Launchpad">
+            <rect width="960" height="420" fill="#f8fafc"/>
+            <rect x="24" y="24" width="912" height="56" rx="8" fill="#0f172a" opacity="0.92"/>
+            <text x="48" y="60" fill="#fff" font-size="20" font-family="Inter" font-weight="600">Fiori Launchpad</text>
+            <rect x="48" y="110" width="180" height="140" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+            <text x="62" y="140" fill="#111827" font-size="12" font-family="Inter" font-weight="600">Display Sales Order</text>
+            <text x="62" y="162" fill="#6b7280" font-size="11" font-family="Inter">Opens VA03 (GUI for HTML)</text>
+            <rect x="62" y="176" width="40" height="40" rx="8" fill="#e5effe" stroke="#bfdbfe"/>
+            <text x="82" y="202" fill="#2563eb" font-size="16" font-family="Inter" text-anchor="middle">SO</text>
+          </svg>
+        </div>
+      </section>
+
+      <section id="troubleshooting" class="card">
+        <h2>Troubleshooting</h2>
+        <ul>
+          <li><strong>Tile not visible</strong>: Ensure the role includes the <em>catalog</em> and the <em>space/page</em>, and the user has the role.</li>
+          <li><strong>Click shows error</strong>: Verify the target mapping?s <em>Semantic Object</em> and <em>Action</em> match the tile. Confirm <em>Application Type</em> is SAP GUI for HTML and the transaction code is correct.</li>
+          <li><strong>Authorization issues</strong>: Generate authorizations in PFCG and check S
+authority objects for SAP GUI for HTML access.</li>
+          <li><strong>Using Groups (legacy)</strong>: If Spaces/Pages are not used, add the tile to a <em>Group</em> and include the Group in the role.</li>
+        </ul>
+      </section>
+
+      <footer class="site-footer">
+        <p>? 2025 SAP Fiori How-To ? Educational guide with illustrative screenshots</p>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
